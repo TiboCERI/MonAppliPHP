@@ -1,0 +1,7 @@
+
+CREATE OR REPLACE FUNCTION Tri(id real, n real) returns varray(10) of varchar(20) as $$
+DECLARE
+BEGIN
+return select post from fredouil.message where destinataire='id' order by post.date  limit n;
+END;
+$$ LANGUAGE plpgsql;

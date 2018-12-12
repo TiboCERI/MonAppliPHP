@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+  <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <!--Import material icon font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
+    <title>
+     Ton appli !
+    </title>
+   
+  </head>
+
+  <body>
+    <h2>Super c'est ton appli ! </h2>
+      <?php include($template_View); ?>
+
+   <form style="center" method="POST" action="monApplication.php?action=login" >
+	   <center>
+	   <div>
+			<label>login </label>
+			<input type="text" name="login"></input></br>
+			<label>password</label>
+			<input type=password name="password"></input></br>
+			<button type="submit" name="send">login</button>
+	   </div>
+	   </center>
+   </form> 
+    
+    
+  </body>
+
+</html>
