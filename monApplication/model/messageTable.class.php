@@ -30,7 +30,18 @@ class messageTable{
 	}
 	
 	
-	
+	public static function getMessagePostedBy($id)
+	{
+		$connection = new dbconnection();
+		$sql = "select * from fredouil.message where emetteur='".$id."'";
+		$res = $connection->doQuery($sql, "message");
+		if($res === false){
+			return false;
+		}
+		else{
+			return $res;
+		}
+	}
 	
 
 

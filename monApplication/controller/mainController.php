@@ -49,11 +49,11 @@ class mainController
 			if(empty($user)) {
 				return context::ERROR;
 			}
-			$mess = postTable::getPostById($request['id']);
+			$mess = messageTable::getMessagePostedBy($request['id']);
 
 			$data['login'] = $user[0];
 						
-			$data['post'] = $mess;
+			$data['message'] = $mess;
 
 			$context->data = $data;
 			if($context->getSessionAttribute('is_logged') == 1 && $request['id'] == $context->getSessionAttribute('id')) {
@@ -63,10 +63,10 @@ class mainController
 			}
 		} else if($context->getSessionAttribute('is_logged') == 1) {
 			$user = utilisateurTable::getUserById($context->getSessionAttribute('id'));
-			$mess = postTable::getPostById($context->getSessionAttribute('id'));
+			$mess = messageTable::getMessagePostedBy($context->getSessionAttribute('id'));
 
 			$data['login'] = $user[0];
-			$data['post'] = $mess;
+			$data['message'] = $mess;
 
 			$context->data = $data;
 			return context::SUCCESS;
@@ -74,9 +74,11 @@ class mainController
 		return context::ERROR;
 	}	
 
+
+		
 		public static function messageme($request, $context)
 	{
-		if(!empty($request['tweetform'])) {
+		if(!empty($request['messageform'])) {
 			$image = (empty($request['image']) ? "null" : $request['image']);
 			$postInfo['texte'] = $request['text'];
 			$postInfo['image'] = $image;
@@ -86,20 +88,22 @@ class mainController
 			$messageInfo['emetteur'] = $context->getSessionAttribute('id');
 			$messageInfo['parent'] = $context->getSessionAttribute('id');
 			$messageInfo['post'] = $idpost;
-			$post = new post($messageInfo);
-			$idPost = $post->save();
+			$message = new message($messageInfo);
+			$idPost = $message->save();
 			return context::SUCCESS;
 		}
 		return context::ERROR;
 	}
+	
+	
 	public static function share($request, $context)
 	{
 		if(!empty($request['idPost'])) {
 			$messageInfo['parent'] = $request['parent'];
 			$messageInfo['post'] = $request['post'];
 			$messageInfo['emetteur'] = $context->getSessionAttribute('id');
-			$post = new post(messageInfo);
-			$id = $post->save();
+			$message = new message($messageInfo);
+			$id = $message->save();
 			return context::SUCCESS;
 		}
 		return context::ERROR;

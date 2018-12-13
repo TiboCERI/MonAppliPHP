@@ -6,24 +6,20 @@ abstract class basemodel
 	
 	public function __construct($data)
 	{
-		this->data[] = $data;
+		$this->data[] = $data;
 	}
 
-	public function __get($att)
-	{
-		if( empty($att))
-		{
-			return NULL;
-		}
+	public function __get($prop)
+    {
+		if(array_key_exists($prop, $this->data))        	
+			return $this->data[$prop];
 		else
-		{
-			return this->data[$att];
-		}
-	}
+			return NULL;      
+    }
 	
 	public function __set($att,$value)
 	{
-		this->data[$att]=$value;
+		$this->data[$att]=$value;
 	}	
 
  public function save()
