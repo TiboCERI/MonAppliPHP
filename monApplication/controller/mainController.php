@@ -76,7 +76,7 @@ class mainController
 
 
 		
-		public static function messageme($request, $context)
+	public static function messageme($request, $context)
 	{
 		if(!empty($request['messageform'])) {
 			$image = (empty($request['image']) ? "null" : $request['image']);
@@ -89,11 +89,13 @@ class mainController
 			$messageInfo['parent'] = $context->getSessionAttribute('id');
 			$messageInfo['post'] = $idpost;
 			$message = new message($messageInfo);
-			$idPost = $message->save();
+			$idmessage = $message->save();
 			return context::SUCCESS;
 		}
 		return context::ERROR;
 	}
+
+
 	
 	
 	public static function share($request, $context)
@@ -138,6 +140,28 @@ class mainController
 			}
 			$context->setSessionAttribute('is_logged', 1);
 			$context->setSessionAttribute('id', $id);
+			return context::SUCCESS;
+		}
+		return context::ACCESS;
+	}
+
+
+	public static function edituser($request, $context)
+	{
+		print_r($request);
+		if(empty($request['edituserform'])) {
+			$userInfo['id'] = $context->getSessionAttribute('id');
+			$userInfo['pass'] = sha1($request['motdepasse']);
+			$userInfo['nom'] = $request['nom'];
+			$userInfo['prenom'] = $request['prenom'];
+			if(isset($request['statut'])) {
+				$userInfo['statut'] = $request['statut'];
+			}
+			if(isset($request['avatar'])) {
+				$userInfo['avatar'] = $request['avatar'];
+			}
+			$user = new utilisateur($userInfo);
+			$id = $user->save();
 			return context::SUCCESS;
 		}
 		return context::ACCESS;

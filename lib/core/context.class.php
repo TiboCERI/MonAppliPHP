@@ -3,7 +3,7 @@ class context
 {
     private $data;
     const SUCCESS="Success";
-    const ACCESS = "Access";
+    const ACCESS ="Access";
     const ERROR="Error";
     const NONE="None";
 	private $name;

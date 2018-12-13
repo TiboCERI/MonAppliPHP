@@ -9,14 +9,11 @@ abstract class basemodel
 		$this->data[] = $data;
 	}
 
-	public function __get($prop)
-    {
-		if(array_key_exists($prop, $this->data))        	
-			return $this->data[$prop];
-		else
-			return NULL;      
-    }
-	
+	 public function __get($att)
+  {
+    return empty($att) ? NULL : $this->data[$att];
+  }
+  
 	public function __set($att,$value)
 	{
 		$this->data[$att]=$value;
