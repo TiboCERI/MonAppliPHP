@@ -113,5 +113,29 @@ class mainController
 		return context::SUCCESS;
 	}
 
-
+	public static function inscription($request, $context)
+	{
+		//print_r($request);
+		if(!empty($request['identifiant']) && !empty($request['motdepasse']) && !empty($request['nom']) && !empty($request['prenom'])) {
+			$userInfo['identifiant'] = $request['identifiant'];
+			$userInfo['pass'] = sha1($request['motdepasse']);
+			$userInfo['nom'] = $request['nom'];
+			$userInfo['prenom'] = $request['prenom'];
+			if(isset($request['statut'])) {
+				$userInfo['statut'] = $request['statut'];
+			}
+			if(isset($request['avatar'])) {
+				$userInfo['avatar'] = $request['avatar'];
+			}
+			$user = new utilisateur($userInfo);
+			$id = $user->save();
+			if(empty($id)) {
+				return context::ERROR;
+			}
+			$context->setSessionAttribute('is_logged', 1);
+			$context->setSessionAttribute('id', $id);
+			return context::SUCCESS;
+		}
+		return context::ACCESS;
+	}
 }

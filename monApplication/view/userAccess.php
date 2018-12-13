@@ -3,7 +3,7 @@
     <?php 
       $avatar=$context->data['login']['avatar'];
       if((strpos($context->data['login']['avatar'], 'http') === true && !filter_var($context->data['login']['avatar'], FILTER_VALIDATE_URL) !== false) || !file_exists($context->data['user']['avatar'])) {
-        $avatar= '././images/avatar-default.png';
+        $avatar= '././images/avatar.png';
       } else {
         $avatar= $context->data['login']['avatar'];
       }

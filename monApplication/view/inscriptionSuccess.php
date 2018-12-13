@@ -1,0 +1,1 @@
+<p>Vous êtes inscrit !</p>
