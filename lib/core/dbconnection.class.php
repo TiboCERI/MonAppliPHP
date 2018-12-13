@@ -42,11 +42,11 @@ class dbconnection
     return $res;
   }
 
-  public function doQueryObject( $sql, $className )
+  public function doQueryObject( $sql, $obj )
   {
 	$prepared = $this->link->prepare( $sql );
     $prepared->execute();
-    $res = $prepared->fetchAll( PDO::FETCH_ASSOC , $className );
+    $res = $prepared->fetchAll( PDO::FETCH_ASSOC , $obj );
    
     return $res;
   }

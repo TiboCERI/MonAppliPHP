@@ -1,6 +1,6 @@
 <?php
 
-class message
+class message extends basemodel
 {
 	public function getPost()
 	{
@@ -14,7 +14,19 @@ class message
 			return $res;
 		}
 	}
-	
+	/*
+	public static function getPost($id)
+  {
+    $connection = new dbconnection() ;
+    
+    $sql = "select * from fredouil.post where id='".$id."'" ;
+    $res = $connection->doQueryObject( $sql , "post" );
+    
+    if($res === false)
+      return false ;
+    return $res ;
+  }*/
+		
 	public function getParent()
 	{
 		$connection = new dbconnection();
