@@ -55,7 +55,7 @@ class mainController
 						
 			$data['message'] = $mess;
 
-			$context->data = $data;
+			$_SESSION['message'] = messageTable::getMessagePostedBy($request['id']);
 			if($context->getSessionAttribute('is_logged') == 1 && $request['id'] == $context->getSessionAttribute('id')) {
 				return context::SUCCESS;
 			} else {
@@ -78,20 +78,19 @@ class mainController
 		
 	public static function messageme($request, $context)
 	{
-		if(!empty($request['messageform'])) {
-			$image = (empty($request['image']) ? "null" : $request['image']);
-			$postInfo['texte'] = $request['text'];
-			$postInfo['image'] = $image;
-			$postInfo['date'] = date("Y-m-d H:i:s");
+	
+			$postInfo = array('texte' => $request['text'], 'date' => date("Y-m-d H:i:s"));
 			$post = new post($postInfo);
 			$idPost = $post->save();
-			$messageInfo['emetteur'] = $context->getSessionAttribute('id');
-			$messageInfo['parent'] = $context->getSessionAttribute('id');
-			$messageInfo['post'] = $idpost;
+			//echo ' id post = '.$idPost;
+			$idUser = $context->getSessionAttribute('id');
+			//echo 'id = '.$idUser;
+			$messageInfo = array('emetteur' => $idUser,'destinataire' => $idUser,  'parent' => $idUser , 'post' => $idPost, 'aime' => 0);
 			$message = new message($messageInfo);
 			$idmessage = $message->save();
+
 			return context::SUCCESS;
-		}
+
 		return context::ERROR;
 	}
 

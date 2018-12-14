@@ -14,11 +14,11 @@
     <form method="post" action="monApplication.php?action=messageme"  enctype="multipart/form-data">
 		<p><div class="input-field col s6">
       <i class="material-icons prefix">mode_edit</i>
-      <textarea placeholder="Nouveau message" id="icon_prefix2" name="text" class="materialize-textarea"></textarea>
+      <textarea placeholder="Nouveau message" id="icon_prefix2" name="text" class="materialize-textarea" required></textarea>
       <div class="file-field input-field">
 	    	<div class="btn light-blue darken-4">
 	    		<span>Inclure photo</span>
-	    		<input type="file" name="imagepokemon">
+	    		<input type="file" name="image">
 	    	</div>
 		    <div class="file-path-wrapper">
 		    	<input class="file-path validate" type="text">
@@ -35,23 +35,27 @@
   	<ul>
 			<li class="collection-header "><h4>Vos Messages</h4></li>
 			<?php
-				$datamessage = $context->data['message'];
-				
-		 		foreach($datamessage as $key -> $message) {
-					var_dump($message);
-					echo $message->post;
-					$messagepost = message::getPost($message -> post);
-					$infopost = new message($messagepost[0]->data);
+
+				var_dump($_SESSION['message']);/*
+				/*
+		 		foreach($context->dataMessage as $value) {
+					//var_dump($message);
+					//echo $message->post;
+					//$messagepost = message::getPost($message -> post);
+					//$infopost = new message($messagepost[0]->data);
 					echo '
 		    		<li class="collection-item avatar z-depth-2">
-	      			<img src="././images/'.$context->data['login']['avatar'].'" alt="" class="circle">
+	      			<img src="././images/'.$value->image.'" alt="" class="circle">
 	      			<span class="title">L\'utilisateur n°'.$message->emetteur.' a tweeté le '.$infopost->date.' : </span>
-	      			<p>'.$infopost->texte.'</br>
+	      			<p>'.$value->texte.'</br>
 	      			</p>
 		    		</li>
 					';
+
 				}
+			*/
 			?>
+
 		</ul>
 	</div>
 
